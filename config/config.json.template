@@ -1,0 +1,160 @@
+{
+    "general": {
+        "app_name": "SentinelX",
+        "version": "1.0.0",
+        "log_level": "INFO",
+        "log_dir": "logs",
+        "data_dir": "data"
+    },
+    "network": {
+        "interfaces": ["eth0"],
+        "capture_timeout": 0,
+        "packet_count": 0,
+        "bpf_filter": "",
+        "promiscuous": true
+    },
+    "storage": {
+        "db_type": "sqlite",
+        "db_path": "data/sentinelx.db",
+        "flow_retention_days": 30,
+        "alert_retention_days": 90,
+        "report_retention_days": 365
+    },
+    "analysis": {
+        "flow_timeout": 60,
+        "enable_ai": true,
+        "ai_model_path": "models/threat_detection.pkl",
+        "anomaly_detection_sensitivity": 0.8,
+        "threat_score_threshold": 0.7
+    },
+    "alerts": {
+        "email": {
+            "enabled": false,
+            "smtp_server": "smtp.example.com",
+            "smtp_port": 587,
+            "smtp_user": "user@example.com",
+            "smtp_password": "",
+            "from_address": "sentinelx@example.com",
+            "to_addresses": ["admin@example.com"]
+        },
+        "webhook": {
+            "enabled": false,
+            "url": "https://example.com/webhook",
+            "auth_token": ""
+        },
+        "syslog": {
+            "enabled": false,
+            "server": "localhost",
+            "port": 514,
+            "protocol": "udp"
+        }
+    },
+    "api": {
+        "enabled": true,
+        "host": "127.0.0.1",
+        "port": 5000,
+        "debug": false,
+        "auth": {
+            "enabled": true,
+            "jwt_secret": "CHANGE_THIS_TO_A_RANDOM_SECRET",
+            "jwt_expiration": 86400,
+            "users": [
+                {
+                    "username": "admin",
+                    "password_hash": "CHANGE_THIS_TO_A_SECURE_PASSWORD_HASH",
+                    "role": "admin"
+                }
+            ]
+        },
+        "cors": {
+            "enabled": true,
+            "allowed_origins": ["http://localhost:8050"]
+        },
+        "rate_limit": {
+            "enabled": true,
+            "requests_per_minute": 60
+        }
+    },
+    "visualization": {
+        "web_dashboard": {
+            "enabled": true,
+            "host": "127.0.0.1",
+            "port": 8050,
+            "debug": false,
+            "theme": "light",
+            "refresh_interval": 60,
+            "default_time_window": "24h"
+        },
+        "network_graph": {
+            "max_nodes": 100,
+            "layout": "force",
+            "node_size_factor": 1.0,
+            "edge_width_factor": 1.0,
+            "highlight_suspicious": true
+        },
+        "alert_dashboard": {
+            "max_alerts": 100,
+            "group_by_category": true,
+            "show_severity_distribution": true
+        },
+        "time_series": {
+            "default_metrics": ["bytes", "packets"],
+            "line_smoothing": true,
+            "show_anomalies": true
+        },
+        "heatmap": {
+            "color_scale": ["#d5f5e3", "#abebc6", "#82e0aa", "#58d68d", "#f8c471", "#e67e22", "#e74c3c", "#c0392b"],
+            "cell_size": 40,
+            "show_grid": true
+        },
+        "geoip": {
+            "map_style": "light",
+            "default_zoom": 2,
+            "max_connections": 1000,
+            "highlight_suspicious": true,
+            "database_path": "data/geoip/GeoLite2-City.mmdb"
+        },
+        "reports": {
+            "company_name": "Your Company",
+            "logo_path": "static/img/logo.png",
+            "include_executive_summary": true,
+            "include_recommendations": true,
+            "include_visualizations": true,
+            "default_format": "pdf"
+        }
+    },
+    "integrations": {
+        "mitre_attack": {
+            "enabled": true,
+            "data_path": "data/mitre/enterprise-attack.json"
+        },
+        "threat_intelligence": {
+            "enabled": true,
+            "sources": [
+                {
+                    "name": "AlienVault OTX",
+                    "enabled": false,
+                    "api_key": "",
+                    "url": "https://otx.alienvault.com/api/v1"
+                },
+                {
+                    "name": "AbuseIPDB",
+                    "enabled": false,
+                    "api_key": "",
+                    "url": "https://api.abuseipdb.com/api/v2"
+                }
+            ],
+            "update_interval": 86400,
+            "local_database_path": "data/threat_intel.db"
+        },
+        "vulnerability_scanner": {
+            "enabled": false,
+            "scanner_type": "openvas",
+            "host": "localhost",
+            "port": 9390,
+            "username": "",
+            "password": "",
+            "scan_interval": 604800
+        }
+    }
+}
