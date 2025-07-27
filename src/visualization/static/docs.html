@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentinelX Visualization Documentation</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        .docs-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .docs-nav {
+            position: sticky;
+            top: 20px;
+            background-color: white;
+            border-radius: 5px;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .docs-nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .docs-nav-item {
+            margin-right: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .docs-nav-link {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .docs-nav-link:hover {
+            text-decoration: underline;
+        }
+        .docs-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .docs-section:last-child {
+            border-bottom: none;
+        }
+        .docs-heading {
+            color: #2c3e50;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .docs-subheading {
+            color: #34495e;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .code-block {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: monospace;
+            margin-bottom: 1rem;
+        }
+        .parameter-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+        .parameter-table th,
+        .parameter-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .parameter-table th {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="header-title">SentinelX Visualization Documentation</h1>
+        </div>
+    </header>
+
+    <div class="docs-container">
+        <nav class="docs-nav">
+            <ul class="docs-nav-list">
+                <li class="docs-nav-item"><a href="#overview" class="docs-nav-link">Overview</a></li>
+                <li class="docs-nav-item"><a href="#installation" class="docs-nav-link">Installation</a></li>
+                <li class="docs-nav-item"><a href="#cli" class="docs-nav-link">CLI Tool</a></li>
+                <li class="docs-nav-item"><a href="#web-dashboard" class="docs-nav-link">Web Dashboard</a></li>
+                <li class="docs-nav-item"><a href="#api" class="docs-nav-link">API Reference</a></li>
+                <li class="docs-nav-item"><a href="#examples" class="docs-nav-link">Examples</a></li>
+                <li class="docs-nav-item"><a href="#troubleshooting" class="docs-nav-link">Troubleshooting</a></li>
+            </ul>
+        </nav>
+
+        <section id="overview" class="docs-section">
+            <h2 class="docs-heading">Overview</h2>
+            <p>SentinelX Visualization Tools provide powerful visualization capabilities for network security monitoring, threat detection, and incident response. The visualization components include:</p>
+            <ul>
+                <li><strong>Network Graph Generator</strong>: Interactive network graphs showing connections between hosts</li>
+                <li><strong>Alert Dashboard</strong>: Comprehensive dashboard for security alerts</li>
+                <li><strong>Time Series Plotter</strong>: Visualize network traffic patterns over time</li>
+                <li><strong>Heatmap Generator</strong>: Heatmaps showing traffic intensity across different network segments</li>
+                <li><strong>GeoIP Mapper</strong>: Map showing geographic distribution of network connections</li>
+                <li><strong>Report Generator</strong>: Generate comprehensive security reports</li>
+            </ul>
+            <p>These tools are available through both a command-line interface (CLI) and a web-based dashboard application.</p>
+        </section>
+
+        <section id="installation" class="docs-section">
+            <h2 class="docs-heading">Installation</h2>
+            <p>SentinelX can be installed using pip:</p>
+            <div class="code-block">
+                pip install sentinelx
+            </div>
+            <p>Or by cloning the repository and installing from source:</p>
+            <div class="code-block">
+                git clone https://github.com/yourusername/sentinelx.git
+                cd sentinelx
+                pip install -e .
+            </div>
+            <h3 class="docs-subheading">Dependencies</h3>
+            <p>SentinelX requires the following dependencies:</p>
+            <ul>
+                <li>Python 3.8+</li>
+                <li>NetworkX</li>
+                <li>Plotly</li>
+                <li>Dash</li>
+                <li>Folium</li>
+                <li>Pandas</li>
+                <li>NumPy</li>
+                <li>And more (see requirements.txt)</li>
+            </ul>
+        </section>
+
+        <section id="cli" class="docs-section">
+            <h2 class="docs-heading">CLI Tool</h2>
+            <p>The SentinelX CLI tool provides command-line access to all visualization capabilities.</p>
+            <h3 class="docs-subheading">Basic Usage</h3>
+            <div class="code-block">
+                # Launch the CLI tool
+                sentinelx-vis cli [command] [options]
+                
+                # Or using the module directly
+                python -m src.visualization cli [command] [options]
+            </div>
+            <h3 class="docs-subheading">Available Commands</h3>
+            <table class="parameter-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>network</code></td>
+                        <td>Generate network graph visualization</td>
+                        <td><code>sentinelx-vis cli network --time-window 1h --format html --output network_graph.html</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>alerts</code></td>
+                        <td>Generate alert dashboard visualization</td>
+                        <td><code>sentinelx-vis cli alerts --severity high --format json --output alerts.json</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>timeseries</code></td>
+                        <td>Generate time series visualization</td>
+                        <td><code>sentinelx-vis cli timeseries --metric bytes --protocol tcp --format png --output traffic.png</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>heatmap</code></td>
+                        <td>Generate heatmap visualization</td>
+                        <td><code>sentinelx-vis cli heatmap --source-filter internal --format html --output heatmap.html</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>geomap</code></td>
+                        <td>Generate geographic IP map visualization</td>
+                        <td><code>sentinelx-vis cli geomap --country-filter US,CN,RU --format html --output geomap.html</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>report</code></td>
+                        <td>Generate comprehensive security report</td>
+                        <td><code>sentinelx-vis cli report --type detailed --format pdf --output security_report.pdf</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dashboard</code></td>
+                        <td>Launch interactive web dashboard</td>
+                        <td><code>sentinelx-vis cli dashboard --port 8050</code></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3 class="docs-subheading">Common Options</h3>
+            <table class="parameter-table">
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>--time-window</code></td>
+                        <td>Time window for data (e.g., 1h, 24h, 7d)</td>
+                        <td>24h</td>
+                    </tr>
+                    <tr>
+                        <td><code>--format</code></td>
+                        <td>Output format (html, json, csv, png, pdf, md, svg)</td>
+                        <td>html</td>
+                    </tr>
+                    <tr>
+                        <td><code>--output</code></td>
+                        <td>Output file path</td>
+                        <td>stdout</td>
+                    </tr>
+                    <tr>
+                        <td><code>--config</code></td>
+                        <td>Path to configuration file</td>
+                        <td>~/.sentinelx/config.json</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="web-dashboard" class="docs-section">
+            <h2 class="docs-heading">Web Dashboard</h2>
+            <p>The SentinelX Web Dashboard provides a user-friendly interface for accessing all visualization capabilities.</p>
+            <h3 class="docs-subheading">Starting the Dashboard</h3>
+            <div class="code-block">
+                # Launch the web dashboard
+                sentinelx-vis web [options]
+                
+                # Or using the module directly
+                python -m src.visualization web [options]
+            </div>
+            <h3 class="docs-subheading">Dashboard Options</h3>
+            <table class="parameter-table">
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>--port</code></td>
+                        <td>Port to run the web server on</td>
+                        <td>8050</td>
+                    </tr>
+                    <tr>
+                        <td><code>--host</code></td>
+                        <td>Host to run the web server on</td>
+                        <td>127.0.0.1</td>
+                    </tr>
+                    <tr>
+                        <td><code>--debug</code></td>
+                        <td>Run in debug mode</td>
+                        <td>False</td>
+                    </tr>
+                    <tr>
+                        <td><code>--config</code></td>
+                        <td>Path to configuration file</td>
+                        <td>~/.sentinelx/config.json</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3 class="docs-subheading">Dashboard Pages</h3>
+            <p>The web dashboard includes the following pages:</p>
+            <ul>
+                <li><strong>Overview</strong>: Summary of security status and key metrics</li>
+                <li><strong>Network</strong>: Interactive network graph visualization</li>
+                <li><strong>Alerts</strong>: Alert dashboard with filtering capabilities</li>
+                <li><strong>Time Series</strong>: Traffic patterns over time</li>
+                <li><strong>Heatmap</strong>: Traffic intensity visualization</li>
+                <li><strong>GeoIP</strong>: Geographic distribution of connections</li>
+                <li><strong>Reports</strong>: Generate and view security reports</li>
+                <li><strong>System Info</strong>: System status and configuration</li>
+            </ul>
+        </section>
+
+        <section id="api" class="docs-section">
+            <h2 class="docs-heading">API Reference</h2>
+            <p>SentinelX provides a Python API for programmatic access to visualization capabilities.</p>
+            <h3 class="docs-subheading">Core Classes</h3>
+            <h4>VisualizationManager</h4>
+            <p>Central manager for all visualization components.</p>
+            <div class="code-block">
+                from sentinelx.visualization import VisualizationManager
+                
+                # Initialize the visualization manager
+                vis_manager = VisualizationManager()
+                
+                # Generate a network graph
+                graph = vis_manager.generate_network_graph(time_window="1h")
+                
+                # Generate an alert dashboard
+                dashboard = vis_manager.generate_alert_dashboard(severity="high")
+            </div>
+            <h4>VisualizationExporter</h4>
+            <p>Handles exporting visualizations to various formats.</p>
+            <div class="code-block">
+                from sentinelx.visualization import VisualizationExporter
+                
+                # Initialize the exporter
+                exporter = VisualizationExporter()
+                
+                # Export a visualization to a file
+                exporter.export_visualization(visualization, format="html", output_path="output.html")
+            </div>
+            <h4>DashboardApp</h4>
+            <p>Web dashboard application.</p>
+            <div class="code-block">
+                from sentinelx.visualization import DashboardApp
+                
+                # Initialize the dashboard app
+                app = DashboardApp()
+                
+                # Run the dashboard
+                app.run(host="127.0.0.1", port=8050, debug=False)
+            </div>
+        </section>
+
+        <section id="examples" class="docs-section">
+            <h2 class="docs-heading">Examples</h2>
+            <h3 class="docs-subheading">Generating a Network Graph</h3>
+            <div class="code-block">
+                from sentinelx.visualization import VisualizationManager, VisualizationExporter
+                
+                # Initialize components
+                vis_manager = VisualizationManager()
+                exporter = VisualizationExporter()
+                
+                # Generate a network graph
+                graph = vis_manager.generate_network_graph(time_window="1h")
+                
+                # Export to HTML
+                exporter.export_visualization(graph, format="html", output_path="network_graph.html")
+            </div>
+            <h3 class="docs-subheading">Creating a Custom Dashboard</h3>
+            <div class="code-block">
+                import dash
+                from dash import html, dcc
+                import dash_bootstrap_components as dbc
+                from sentinelx.visualization import VisualizationManager
+                
+                # Initialize visualization manager
+                vis_manager = VisualizationManager()
+                
+                # Create a Dash app
+                app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+                
+                # Define layout
+                app.layout = dbc.Container([
+                    html.H1("Custom Security Dashboard"),
+                    dbc.Row([
+                        dbc.Col([
+                            html.H3("Network Activity"),
+                            dcc.Graph(id="network-graph")
+                        ], width=6),
+                        dbc.Col([
+                            html.H3("Alert Summary"),
+                            dcc.Graph(id="alert-summary")
+                        ], width=6)
+                    ])
+                ])
+                
+                # Define callbacks
+                @app.callback(
+                    dash.dependencies.Output("network-graph", "figure"),
+                    dash.dependencies.Input("interval-component", "n_intervals")
+                )
+                def update_network_graph(n):
+                    graph = vis_manager.generate_network_graph(time_window="1h")
+                    return graph.to_plotly_figure()
+                
+                # Run the app
+                if __name__ == "__main__":
+                    app.run_server(debug=True)
+            </div>
+        </section>
+
+        <section id="troubleshooting" class="docs-section">
+            <h2 class="docs-heading">Troubleshooting</h2>
+            <h3 class="docs-subheading">Common Issues</h3>
+            <h4>Dashboard Not Starting</h4>
+            <p>If the dashboard fails to start, check the following:</p>
+            <ul>
+                <li>Ensure all dependencies are installed</li>
+                <li>Check if the specified port is already in use</li>
+                <li>Verify that the configuration file exists and is valid</li>
+            </ul>
+            <h4>Visualization Export Errors</h4>
+            <p>If exporting visualizations fails:</p>
+            <ul>
+                <li>Ensure the output directory exists and is writable</li>
+                <li>Check if the required dependencies for the specific format are installed</li>
+                <li>Verify that the visualization object is valid</li>
+            </ul>
+            <h3 class="docs-subheading">Getting Help</h3>
+            <p>If you encounter issues not covered here, you can:</p>
+            <ul>
+                <li>Check the logs in <code>~/.sentinelx/logs/</code></li>
+                <li>Run with debug mode enabled: <code>sentinelx-vis web --debug</code></li>
+                <li>Submit an issue on the GitHub repository</li>
+                <li>Contact support at support@sentinelx.example.com</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer class="header" style="margin-top: 2rem;">
+        <div class="container">
+            <p>&copy; 2023 SentinelX - AI-Powered Network Security Monitoring</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  sentinelx-web:
+    build: .
+    container_name: sentinelx-web
+    ports:
+      - "8050:8050"
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+    environment:
+      - SENTINELX_CONFIG=/app/config/config.json
+    command: python -m src.visualization web --host 0.0.0.0 --port 8050
+    restart: unless-stopped
+
+  sentinelx-monitor:
+    build: .
+    container_name: sentinelx-monitor
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+      - /var/log:/var/log:ro
+    environment:
+      - SENTINELX_CONFIG=/app/config/config.json
+    command: python -m src.core monitor
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+
+  sentinelx-api:
+    build: .
+    container_name: sentinelx-api
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+    environment:
+      - SENTINELX_CONFIG=/app/config/config.json
+    command: python -m src.api run --host 0.0.0.0 --port 5000
+    restart: unless-stopped
+    depends_on:
+      - sentinelx-monitor
+
+volumes:
+  data:
+  config:

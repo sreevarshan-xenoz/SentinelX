@@ -12,6 +12,8 @@ requests>=2.27.0
 tqdm>=4.62.0
 colorama>=0.4.4
 tabulate>=0.8.9
+networkx>=2.6.0
+scipy>=1.7.0
 
 # Network monitoring
 scapy>=2.4.5
@@ -24,6 +26,10 @@ uvicorn>=0.17.6
 pydantic>=1.9.0
 python-multipart>=0.0.5
 starlette>=0.19.1
+flask>=2.0.0
+dash>=2.0.0
+dash-bootstrap-components>=1.0.0
+plotly>=5.0.0
 
 # Threat intelligence
 abuseipdb>=0.3.0
@@ -40,3 +46,12 @@ python-dotenv>=0.20.0
 argparse>=1.4.0
 loguru>=0.6.0
 rich>=12.0.0
+
+# Visualization
+folium>=0.12.0
+geopandas>=0.10.0
+pydeck>=0.7.0
+kaleido>=0.2.0  # For static image export
+reportlab>=3.6.0  # For PDF generation
+markdown>=3.3.0  # For markdown processing
+sqlalchemy>=1.4.0  # For data storage
